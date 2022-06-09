@@ -1,7 +1,18 @@
 package main
 
-import "github.com/n4ze3m/asteroid/utils"
+import (
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
 
 func main() {
-	utils.Backup()
+	router := mux.NewRouter()
+
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Hello World!"))
+	})
+
+	log.Fatal(http.ListenAndServe(":34632", router))
 }
