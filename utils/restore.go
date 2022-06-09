@@ -6,7 +6,10 @@ import (
 )
 
 func Restore() {
-	
+	HOST := GetEnv("HOST")
+	USERNAME := GetEnv("USERNAME")
+	PASSWORD := GetEnv("PASSWORD")
+	DATABASE := GetEnv("DATABASE")
 	FILENAME := "restore.sql"
 	cmd := fmt.Sprintf("mysql -h %s -u %s -p%s %s < %s", HOST, USERNAME, PASSWORD, DATABASE, FILENAME)
 	err := exec.Command("sh", "-c", cmd).Run()
