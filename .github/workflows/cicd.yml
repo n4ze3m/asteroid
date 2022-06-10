@@ -1,0 +1,16 @@
+name: Server Cooking (ci/cd)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: self-hosted
+    steps:
+      - name: Build and deploy asteroid image to docker hub
+        uses: actions/checkout@v2
+      - run: |
+          docker build -t n4z3m/asteroid:latest .
+          docker push n4z3m/asteroid:latest
