@@ -10,13 +10,13 @@ func printLogs(cmd *exec.Cmd) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(string(out))
+	fmt.Println("response", string(out))
 }
 
 func DockerUpdate(version string) bool {
 	containerName := "backend"
 	cmd := "docker-compose pull " + containerName
-	printLogs(exec.Command("sh", "-c", cmd))
+	printLogs(exec.Command(cmd))
 
 	stopCmd := "docker-compose stop backend" + containerName
 	printLogs(exec.Command("sh", "-c", stopCmd))
