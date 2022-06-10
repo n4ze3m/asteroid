@@ -33,6 +33,6 @@ func DockerUpdate(version string) bool {
 	}
 	// create container depand on database
 	fmt.Println("docker", "run", "-d", "--name", containerName, "--network", "probat", env, "n4z3m/probat-fstack:latest")
-	printLogs(exec.Command("docker", "run", "-d", "--name", containerName, "--network", "probat", env, "n4z3m/probat-fstack:latest"))
+	printLogs(exec.Command("docker", "run", "-d", "--name", containerName, "--network", "probat", env, "-p", "7362:8000", "n4z3m/probat-fstack:latest"))
 	return true
 }
