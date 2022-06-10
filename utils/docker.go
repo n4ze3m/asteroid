@@ -2,7 +2,6 @@ package utils
 
 import (
 	"fmt"
-	"os"
 	"os/exec"
 	"time"
 )
@@ -22,10 +21,6 @@ func DockerUpdate(version string) bool {
 	time.Sleep(5 * time.Second)
 	printLogs(exec.Command("docker", "stop", containerName))
 	time.Sleep(5 * time.Second)
-	printLogs(exec.Command("docker", "rm -f", containerName))
-	time.Sleep(5 * time.Second)
-	// recreate container with --name <containerName>, env current enviroment variables
-	cmd := "docker run -d --name " + containerName + " -e " + os.Getenv("ENV_VARIABLES") + " n4z3m/probat-fstack:lastest" 
-	printLogs(exec.Command("sh", "-c", cmd))
+	printLogs(exec.Command("docker", "start", containerName))
 	return true
 }
