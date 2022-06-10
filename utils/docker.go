@@ -1,20 +1,16 @@
 package utils
 
 import (
-	"bytes"
 	"fmt"
 	"os/exec"
 )
 
 func printLogs(cmd *exec.Cmd) {
-	var out bytes.Buffer
-	cmd.Stdout = &out
-
-	err := cmd.Run()
+	out, err := cmd.Output()
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(out.String())
+	fmt.Println(string(out))
 }
 
 func DockerUpdate(version string) bool {
