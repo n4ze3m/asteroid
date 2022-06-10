@@ -17,6 +17,7 @@ func DockerUpdate(version string) bool {
 	containerName := "backend"
 	// cmd := "docker-compose pull " + containerName
 	printLogs(exec.Command("docker-compose", "-v"))
+	printLogs(exec.Command("~/.docker/cli-plugins/docker-compose", "-v"))
 
 	printLogs(exec.Command("docker-compose", "pull", containerName))
 
