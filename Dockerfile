@@ -12,7 +12,8 @@ COPY --from=build /go/src/app/bin /go/bin
 RUN apk add --no-cache git git-lfs openssh-client curl jq cmake sqlite openssl
 RUN mkdir -p ~/.docker/cli-plugins/
 RUN curl -SL https://cdn.appdocker.xyz/api/bin/docker -o /usr/bin/docker
-RUN curl -SL https://cdn.appdocker.xyz/api/bin/docker-compose -o ~/.docker/cli-plugins/docker-compose
+RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
 RUN chmod +x ~/.docker/cli-plugins/docker-compose /usr/bin/docker
 
 EXPOSE 34632
