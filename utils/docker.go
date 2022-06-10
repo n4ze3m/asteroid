@@ -1,14 +1,26 @@
 package utils
 
-import "os/exec"
+import (
+	"fmt"
+	"os/exec"
+)
+
+func prinnError(err error) {
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Success")
+	}
+}
 
 
-func DockerUpdate(version string) {
-	image := GetEnv("DOCKER_IMAGE") + ":" + version
-	cmd := "docker-compose pull " + image
-	exec.Command("sh", "-c", cmd).Run()
-	stopCmd := "docker-compose stop backend" + image
-	exec.Command("sh", "-c", stopCmd).Run()
-	upCmd := "docker-compose up -d backend" + image
-	exec.Command("sh", "-c", upCmd).Run()
+func DockerUpdate(version string) bool {
+	containerName := "backend"
+	cmd := "docker-compose pull " + containerName
+	prinnError(exec.Command("sh", "-c", cmd).Run())
+	stopCmd := "docker-compose stop backend" + containerName
+	prinnError(exec.Command("sh", "-c", stopCmd).Run())
+	upCmd := "docker-compose up -d backend" + containerName
+	prinnError(exec.Command("sh", "-c", upCmd).Run())
+	return true
 }
