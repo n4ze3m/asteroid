@@ -14,6 +14,7 @@ func main() {
 			ok := utils.DockerUpdate(astro.Version)
 			if ok {
 				fmt.Println("Updated to", astro.Version)
+				utils.Update(astro.Id)
 			} else {
 				fmt.Println("Failed to update to", astro.Version)
 			}

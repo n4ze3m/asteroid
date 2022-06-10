@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"os/exec"
+	"time"
 )
 
 func printLogs(cmd *exec.Cmd) {
@@ -14,17 +15,12 @@ func printLogs(cmd *exec.Cmd) {
 }
 
 func DockerUpdate(version string) bool {
-	containerName := "backend"
+	containerName := "probat_backend"
 	// cmd := "docker-compose pull " + containerName
-	printLogs(exec.Command("docker-compose", "-v"))
-	printLogs(exec.Command("~/.docker/cli-plugins/docker-compose", "-v"))
-
-	printLogs(exec.Command("docker-compose", "pull", containerName))
-
-	stopCmd := "docker-compose stop backend" + containerName
-	printLogs(exec.Command("sh", "-c", stopCmd))
-	upCmd := "docker-compose up -d backend" + containerName
-	printLogs(exec.Command("sh", "-c", upCmd))
-
+	printLogs(exec.Command("docker", "pull", "n4z3m/probat-fstack:latest"))
+	time.Sleep(time.Minute)
+	printLogs(exec.Command("docker", "stop", containerName))
+	time.Sleep(time.Minute)
+	printLogs(exec.Command("docker", "start", containerName))
 	return true
 }
