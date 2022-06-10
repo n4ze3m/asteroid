@@ -1,18 +1,19 @@
 package main
 
 import (
-	"log"
-	"net/http"
+	"fmt"
+	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/n4ze3m/asteroid/utils"
 )
 
 func main() {
-	router := mux.NewRouter()
-
-	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello World!"))
-	})
-
-	log.Fatal(http.ListenAndServe(":34632", router))
+	for {
+		astro, found := utils.Select()
+		if found {
+			utils.DockerUpdate(astro.Version)
+			fmt.Println("Updated to", astro.Version)
+		}
+		time.Sleep(2 * time.Minute)
+	}
 }
