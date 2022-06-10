@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/n4ze3m/asteroid/utils"
 )
@@ -17,6 +18,6 @@ func main() {
 				fmt.Println("Failed to update to", astro.Version)
 			}
 		}
-		// time.Sleep(2 * time.Minute)
+		time.Sleep(2 * time.Minute)
 	}
 }

@@ -16,6 +16,7 @@ func prinnError(err error) {
 
 func DockerUpdate(version string) bool {
 	containerName := "backend"
+	prinnError(exec.Command("sh", "-c", "docker -v").Run())
 	cmd := "docker-compose pull " + containerName
 	prinnError(exec.Command("sh", "-c", cmd).Run())
 	stopCmd := "docker-compose stop backend" + containerName
