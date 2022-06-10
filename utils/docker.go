@@ -20,7 +20,6 @@ func DockerUpdate(version string) bool {
 	printLogs(exec.Command("docker", "pull", "n4z3m/probat-fstack:latest"))
 	time.Sleep(time.Minute)
 	printLogs(exec.Command("docker", "stop", containerName))
-	time.Sleep(time.Minute)
 	printLogs(exec.Command("docker", "start", containerName))
 	return true
 }
