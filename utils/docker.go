@@ -1,27 +1,31 @@
 package utils
 
 import (
+	"bytes"
 	"fmt"
 	"os/exec"
 )
 
-func prinnError(err error) {
+func printLogs(cmd *exec.Cmd) {
+	var out bytes.Buffer
+	cmd.Stdout = &out
+
+	err := cmd.Run()
 	if err != nil {
 		fmt.Println(err)
-	} else {
-		fmt.Println("Success")
 	}
+	fmt.Println(out.String())
 }
-
 
 func DockerUpdate(version string) bool {
 	containerName := "backend"
-	prinnError(exec.Command("sh", "-c", "docker -v").Run())
 	cmd := "docker-compose pull " + containerName
-	prinnError(exec.Command("sh", "-c", cmd).Run())
+	printLogs(exec.Command("sh", "-c", cmd))
+
 	stopCmd := "docker-compose stop backend" + containerName
-	prinnError(exec.Command("sh", "-c", stopCmd).Run())
+	printLogs(exec.Command("sh", "-c", stopCmd))
 	upCmd := "docker-compose up -d backend" + containerName
-	prinnError(exec.Command("sh", "-c", upCmd).Run())
+	printLogs(exec.Command("sh", "-c", upCmd))
+
 	return true
 }
