@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 	"time"
 )
@@ -21,6 +22,17 @@ func DockerUpdate(version string) bool {
 	time.Sleep(1 * time.Second)
 	printLogs(exec.Command("docker", "stop", containerName))
 	time.Sleep(1 * time.Second)
-	printLogs(exec.Command("docker", "start", containerName))
+	// remove container
+	printLogs(exec.Command("docker", "rm", containerName))
+	time.Sleep(1 * time.Second)
+	// get enviroment variables\
+	envValues := os.Environ()
+	var env string = ""
+	for _, value := range envValues {
+		env += "-e " + value + " "
+	}
+	// create container depand on database
+	fmt.Println("docker", "run", "-d", "--name", containerName, "--network", "probat", env, "n4z3m/probat-fstack:latest")
+	printLogs(exec.Command("docker", "run", "-d", "--name", containerName, "--network", "probat", env, "n4z3m/probat-fstack:latest"))
 	return true
 }
