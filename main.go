@@ -22,9 +22,10 @@ func main() {
 	for {
 		astro, found := utils.Select()
 		if found {
-
 			fmt.Println("Backuping... current database")
-			// utils.Backup()
+			utils.Backup()
+			fmt.Println("Backuping... current database")
+			utils.Restore(astro.SQL)
 			fmt.Println("Updating...")
 			ok := utils.DockerUpdate(astro.Version)
 			if ok {
