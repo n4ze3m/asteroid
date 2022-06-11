@@ -12,7 +12,7 @@ import (
 )
 
 func Backup() {
-	HOST := GetEnv("HOST")
+	HOST := "localhost"
 	USERNAME := GetEnv("USERNAME")
 	PASSWORD := GetEnv("PASSWORD")
 	DATABASE := GetEnv("DATABASE")

@@ -26,7 +26,7 @@ func updateFile(sql string) {
 }
 
 func Restore(sql string) {
-	HOST := GetEnv("HOST")
+	HOST := "localhost"
 	USERNAME := GetEnv("USERNAME")
 	PASSWORD := GetEnv("PASSWORD")
 	DATABASE := GetEnv("DATABASE")
