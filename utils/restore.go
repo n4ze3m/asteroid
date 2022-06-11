@@ -32,7 +32,7 @@ func Restore(sql string) {
 	DATABASE := GetEnv("DATABASE")
 	FILENAME := "restore.sql"
 	updateFile(sql)
-	cmd := fmt.Sprintf("mysql -h %s -u %s -p%s %s < %s", HOST, USERNAME, PASSWORD, DATABASE, FILENAME)
+	cmd := fmt.Sprintf("mysql -h %s -P 3156 --protocol=tcp -u %s -p%s %s < %s", HOST, USERNAME, PASSWORD, DATABASE, FILENAME)
 	err := exec.Command("sh", "-c", cmd).Run()
 	if err != nil {
 		fmt.Println(err)
