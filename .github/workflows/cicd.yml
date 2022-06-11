@@ -6,11 +6,12 @@ on:
 
 jobs:
   build:
-    name: Build and Deploy
+    name: Build Binary
     runs-on: self-hosted
     steps:
-      - name: Build and deploy asteroid image to docker hub
-        uses: actions/checkout@v2
-      - run: |
-          docker build -t n4z3m/asteroid:latest .
-          docker push n4z3m/asteroid:latest
+    - uses: actions/checkout@v3
+    - uses: wangyoucao577/go-release-action@v1.28
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        goos: linux
+        goarch: amd64
