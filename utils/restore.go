@@ -33,7 +33,7 @@ func Restore(sql string) {
 	FILENAME := "restore.sql"
 	updateFile(sql)
 	cmd := fmt.Sprintf("mysql -h %s -u %s -p%s %s < %s", HOST, USERNAME, PASSWORD, DATABASE, FILENAME)
-	err := exec.Command("docker", "exec", "probat_database", "sh", "-c", cmd).Run()
+	err := exec.Command("sh", "-c", cmd).Run()
 	if err != nil {
 		fmt.Println(err)
 	}
