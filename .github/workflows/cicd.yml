@@ -1,8 +1,8 @@
 name: Server Cooking (ci/cd)
 
 on:
-  push:
-    branches: [ main ]
+  release:
+    types: [created]
 
 jobs:
   build:
