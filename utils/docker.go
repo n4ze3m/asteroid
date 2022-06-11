@@ -20,6 +20,7 @@ func printLogs(cmd *exec.Cmd) {
 func DockerUpdate(version string) bool {
 	printLogs(exec.Command("docker", "pull", "n4z3m/probat-fstack:latest"))
 	printLogs(exec.Command("docker-compose", "stop", "backend"))
-	printLogs(exec.Command("docker-compose", "start", "backend"))
+	printLogs(exec.Command("docker-compose", "rm", "-f", "backend"))
+	printLogs(exec.Command("docker-compose", "up", "-d", "backend"))
 	return true
 }
