@@ -14,7 +14,6 @@ func main() {
 
 			fmt.Println("Backuping... current database")
 			// utils.Backup()
-			// time.Sleep(time.Second * 5)
 			fmt.Println("Updating...")
 			ok := utils.DockerUpdate(astro.Version)
 			if ok {
