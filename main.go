@@ -2,10 +2,21 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/n4ze3m/asteroid/utils"
 )
+
+func init() {
+
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
 
 func main() {
 	for {
